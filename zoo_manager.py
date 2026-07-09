@@ -8,7 +8,10 @@ class Animal:
         self._sound = sound
     
     def speak(self):
-        return self._sound
+        print(self._sound) 
+    
+    def __repr__(self):
+        return f"Name: {self._name}"
 
 class Mammal(Animal):
     def __init__(self, 
@@ -20,6 +23,8 @@ class Mammal(Animal):
     def give_birth(self):
         print(f"Mammal: {self._name} has given birth")
 
+
+
 class Bird(Animal):
     def __init__(self,
             name:str,
@@ -28,6 +33,8 @@ class Bird(Animal):
             wingspan:int):
         super().__init__(name, species, sound)
         self._wingspan = wingspan
+
+
 
 class Reptile(Animal):
     def __init__(self,
@@ -41,8 +48,8 @@ class Reptile(Animal):
 
 class Primate(Mammal):
     def __init__(self, 
-            name, 
-            species, 
+            name,
+            species,
             sound):
         super().__init__(name, species, sound)
     
@@ -51,8 +58,8 @@ class Primate(Mammal):
 
 class Marsupial(Mammal):
     def __init__(self, 
-        name, 
-        species, 
+        name,
+        species,
         sound):
         super().__init__(name, species, sound)
 
@@ -60,24 +67,88 @@ class Marsupial(Mammal):
         print(f"{self._name} is carrying its baby")
 
 
-class 
-        
 
 
-goat = Mammal("goat", "mammal", "bahhh")
+class Enclosure:
+    def __init__(self,
+                 animals:list[Animal]=[]):
+        self._animals = animals
+    
+    def add_animals(self, *new_animals):
+        self._animals.extend(new_animals)
+
+    @property
+    def animals(self):
+        return f"{self._animals}"
+
+
+class Aviary(Enclosure):
+    def sqwuak(self):
+        for animal in self._animals:
+            animal.speak()
+
+    
+
+class ReptileEnclosure(Enclosure):
+    pass
+
+
+
+
 eagle = Bird("Eagle", "bird", "KAAW", 20)
-print(goat._name)
-print(goat._species)
-print(f"\n{eagle._wingspan}")
+gator = Reptile("Gator", "reptile", "croak")
 
-gator = Reptile("gator", "reptile", "croak")
+enclosure1 = Aviary([eagle])
 
-gator.bask_in_sun()
+print(enclosure1.animals)
 
-monkey = Primate("Monkey", "Primate", "ooh")
+enclosure1.sqwuak()
 
-monkey.climb_trees()
+enclosure2 = ReptileEnclosure([gator])
 
-opossum = Marsupial("Opossum", "Marsupial", "hisss")
+print(enclosure2.animals)
 
-opossum.carry_babies()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# print(f"enclosure one has: {enclosure1.birds}")
+
+
+
+# goat = Mammal("goat", "mammal", "bahhh")
+
+# print(goat._name)
+# print(goat._species)
+# print(f"\n{eagle._wingspan}")
+
+
+# gator.bask_in_sun()
+
+# monkey = Primate("Monkey", "Primate", "ooh")
+
+# monkey.climb_trees()
+
+# opossum = Marsupial("Opossum", "Marsupial", "hisss")
+
+# opossum.carry_babies()
